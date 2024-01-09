@@ -6,7 +6,7 @@ from database import get_user_profile, get_content_metadata, store_user_profile,
 from preprocessing import load_and_preprocess_data
 
 app = Flask(__name__)
-app.config['JWT_SECRET_KEY'] = 'super-secret-key'  # Change this in production
+app.config['JWT_SECRET_KEY'] = 'super-secret-key'
 
 jwt = JWTManager(app)
 logging.basicConfig(level=logging.DEBUG)
@@ -21,7 +21,7 @@ def login():
     username = request.json.get('username', None)
     password = request.json.get('password', None)
     
-    if not validate_user(username, password): # Assuming the validate_user function is implemented in the database module
+    if not validate_user(username, password):
         return jsonify({"msg": "Bad username or password"}), 401
 
     access_token = create_access_token(identity=username)
